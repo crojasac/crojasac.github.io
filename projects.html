@@ -1,155 +1,298 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>Projects | Your Name</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI490 Portfolio — Projects</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Same font as index.html and project.html -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Syntax highlighting for the code snippet (light theme) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+
   <style>
     :root {
-      --primary: #18181b;
-      --accent: #6366f1;
-      --text: #f3f4f6;
-      --card: #23232a;
-      --border: #2d2d34;
-      --link: #60a5fa;
+      --bg-main: #f4f6fb;
+      --bg-card: #ffffff;
+      --bg-code: #f8fafc;
+      --accent: #1f4fbf;
+      --accent-soft: #e3ebff;
+      --text-main: #1f2933;
+      --text-muted: #6b7280;
+      --border-soft: #e5e7eb;
+      --radius-lg: 16px;
+      --radius-xl: 22px;
+      --shadow-soft: 0 12px 30px rgba(15, 23, 42, 0.08);
     }
-    html, body { height: 100%; }
-    body {
+
+    * {
+      box-sizing: border-box;
       margin: 0;
-      background: var(--primary);
-      color: var(--text);
-      font-family: 'Inter', system-ui, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      padding: 0;
     }
-    header {
-      width: 100%;
-      background: var(--card);
-      border-bottom: 1px solid var(--border);
-      padding: 0 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
     }
-    .brand {
-      font-weight: 700;
-      font-size: 1.5em;
-      color: var(--accent);
-      letter-spacing: 1px;
-    }
-    nav a {
-      color: var(--link);
-      text-decoration: none;
-      font-weight: 500;
-      margin-left: 32px;
-      transition: color .2s;
-    }
-    nav a:hover {
-      color: var(--accent);
-    }
-    .container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 48px 16px 0 16px;
-      max-width: 700px;
+
+    .page {
+      max-width: 1080px;
       margin: 0 auto;
+      padding: 24px 16px 48px;
     }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 40px 32px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-      width: 100%;
-      margin-bottom: 32px;
-    }
-    h1 {
+
+    a {
+      text-decoration: none;
       color: var(--accent);
-      font-size: 2em;
+    }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 18px;
-      font-weight: 700;
     }
-    .project {
-      margin-bottom: 32px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
+
+    .back-link {
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
     }
-    .project:last-child {
-      border-bottom: none;
+
+    .back-link span {
+      font-size: 1.1rem;
+      line-height: 1;
     }
-    .project-title {
-      font-size: 1.25em;
-      color: var(--accent);
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-    .project-desc {
-      color: #cbd5e1;
-      margin-bottom: 8px;
-      font-size: 1.08em;
-    }
-    .project-links a {
-      color: var(--link);
-      text-decoration: underline;
-      margin-right: 16px;
-      font-size: 1em;
+
+    .nav-link {
+      font-size: 0.9rem;
       font-weight: 500;
-      transition: color .2s;
     }
-    .project-links a:hover {
+
+    header {
+      margin-bottom: 24px;
+    }
+
+    .title {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #111827;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .card {
+      background-color: var(--bg-card);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border-soft);
+    }
+
+    .project-label {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
       color: var(--accent);
+      background-color: var(--accent-soft);
+      border-radius: 999px;
+      padding: 2px 10px;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .project-desc {
+      margin-bottom: 16px;
+    }
+
+    .project-layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      align-items: start;
+    }
+
+    .wordcloud-img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      display: block;
+    }
+
+    .code-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    pre[class*="language-"] {
+      margin: 0;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-code);
+      font-size: 0.82rem;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.18s ease, box-shadow 0.18s ease, transform 0.08s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-primary:hover {
+      background-color: #1740a0;
+      transform: translateY(-1px);
+      box-shadow: 0 14px 26px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn-secondary {
+      background-color: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .btn-secondary:hover {
+      background-color: #d3defc;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      padding: 8px 16px 32px;
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 18px 12px 32px;
+      }
+      .card {
+        padding: 18px 16px;
+      }
+      .project-layout {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="brand">AI490 Portfolio</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="CV.pdf" target="_blank">CV</a>
+  <div class="page">
+    <nav class="top-nav">
+      <a href="index.html" class="back-link">
+        <span>←</span> Back to Home
+      </a>
+      <a href="resume.pdf" class="nav-link" target="_blank" rel="noopener noreferrer">Resume</a>
     </nav>
-  </header>
-  <div class="container">
-    <div class="card">
-      <h1>Projects</h1>
-      <div class="project">
-        <div class="project-title">Project 1: Word Cloud</div>
-        <div class="project-desc">We used students' "dream objectives about the class" from an AI course to generate a word cloud. This visualization highlights the most common aspirations and interests among the students.</div>
-        <div class="project-links">
-          <a href="wordcloud.py" target="_blank">Python Code</a>
-          <a href="wordcloud.png" target="_blank">Generated Word Cloud (PNG)</a>
-        </div>
-          <div class="project-code">
-            <h3>Python Code Snippet</h3>
-            <pre><code class="language-python"># Example: wordcloud.py
-  import matplotlib.pyplot as plt
-  from wordcloud import WordCloud
 
-  text = "AI class dream objectives..."
-  wordcloud = WordCloud().generate(text)
-  plt.imshow(wordcloud, interpolation='bilinear')
-  plt.axis("off")
-  plt.savefig("wordcloud.png")
-  </code></pre>
-          </div>
+    <header>
+      <h1 class="title">Projects</h1>
+      <p class="subtitle">Work from RESECON 490AI: AI in Economics | UMass Amherst</p>
+    </header>
+
+    <!-- PROJECT 1: AI CLASS PROJECT -->
+    <section class="card">
+      <span class="project-label">Project 1</span>
+      <h2 class="section-title">AI Class Project</h2>
+      <!-- TODO: Replace with a one- or two-sentence summary of your project -->
+      <p class="project-desc">
+        An applied AI and data-analysis project on a topic in managerial economics,
+        with a written report and presentation slides.
+      </p>
+      <div class="actions">
+        <a href="project.html" class="btn btn-primary">View Project</a>
       </div>
-      <!-- Add more projects below as needed -->
-    </div>
+    </section>
+
+    <!-- PROJECT 2: WORD CLOUD -->
+    <section class="card">
+      <span class="project-label">Project 2</span>
+      <h2 class="section-title">Word Cloud of Class Objectives</h2>
+      <p class="project-desc">
+        We used students' "dream objectives about the class" from an AI course to generate
+        a word cloud. The visualization highlights the most common aspirations and interests
+        among the students.
+      </p>
+
+      <div class="project-layout">
+        <a href="wordcloud.png" target="_blank" rel="noopener noreferrer">
+          <img src="wordcloud.png" alt="Word cloud of students' objectives for the AI class" class="wordcloud-img" />
+        </a>
+
+        <div>
+          <h3 class="code-title">Python code snippet (from wordcloud.py)</h3>
+<pre><code class="language-python">from wordcloud import WordCloud, STOPWORDS
+
+def generate_wordcloud(text, out_path):
+    wc = WordCloud(
+        width=1600,
+        height=900,
+        background_color="white",
+        stopwords=STOPWORDS,
+        collocations=True,
+    ).generate(text)
+    wc.to_file(str(out_path))</code></pre>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a href="wordcloud.py" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Full Python Code</a>
+        <a href="wordcloud.txt" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Source Text</a>
+      </div>
+    </section>
+
+    <!-- Add more projects below as needed, copying one of the cards above -->
   </div>
+
   <footer>
+    <!-- TODO: Replace "Your Name" with your actual name -->
     &copy; 2025 Your Name. All rights reserved.
   </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 </body>
 </html>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>

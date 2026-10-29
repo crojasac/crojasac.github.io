@@ -160,6 +160,12 @@
       box-shadow: 0 14px 26px rgba(37, 99, 235, 0.4);
     }
 
+    .btn-disabled {
+      background-color: var(--border-soft);
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+
     @media (max-width: 640px) {
       .page {
         padding: 18px 12px 32px;
@@ -172,9 +178,9 @@
 </head>
 <body>
   <div class="page">
-    <!-- Back to home (index.html) -->
-    <a href="index.html" class="back-link">
-      <span>←</span> Back to Home
+    <!-- Back to the projects list (projects.html) -->
+    <a href="projects.html" class="back-link">
+      <span>←</span> Back to Projects
     </a>
 
     <header>
@@ -226,14 +232,13 @@
 
           <!--
             TODO:
-            - For now, this can just be "#" as a placeholder.
-            - Once you have your slides, save them as
-              "slides.pdf" (or another file name) in the same folder
-              and update the href below, e.g. href="slides.pdf".
+            - Once you have your slides, save them as "slides.pdf" in the
+              same folder and replace the <span> below with:
+              <a href="slides.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Presentation</a>
           -->
-          <a href="#" class="btn btn-primary">
+          <span class="btn btn-disabled" aria-disabled="true">
             View Presentation
-          </a>
+          </span>
 
           <p class="mini-card-footer">
             (Coming soon – slides will be linked here.)
@@ -259,10 +264,6 @@
           <a href="project.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
             View Report
           </a>
-
-          <p class="mini-card-footer">
-            (Placeholder – upload your current or final project PDF.)
-          </p>
         </article>
       </div>
     </section>
