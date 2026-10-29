@@ -160,10 +160,71 @@
       box-shadow: 0 14px 26px rgba(37, 99, 235, 0.4);
     }
 
-    .btn-disabled {
-      background-color: var(--border-soft);
+    /* Pop-up viewer for the word cloud */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background-color: rgba(15, 23, 42, 0.7);
+      z-index: 100;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background-color: var(--bg-card);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      padding: 20px 20px 16px;
+      width: 100%;
+      max-width: 1000px;
+      max-height: 100%;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0 40px 12px 4px;
+    }
+
+    .modal-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+    }
+
+    .modal-caption {
+      font-size: 0.85rem;
       color: var(--text-muted);
-      cursor: not-allowed;
+      margin: 10px 4px 0;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: none;
+      background-color: var(--accent-soft);
+      color: var(--accent);
+      font-size: 1.3rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      background-color: #d3defc;
     }
 
     @media (max-width: 640px) {
@@ -226,22 +287,20 @@
           <div>
             <h3 class="mini-card-title">Presentation Slides</h3>
             <p class="mini-card-desc">
-              View the slide deck used to present this project.
+              View the class word cloud: what students hope to get out of this course.
             </p>
           </div>
 
           <!--
-            TODO:
-            - Once you have your slides, save them as "slides.pdf" in the
-              same folder and replace the <span> below with:
-              <a href="slides.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Presentation</a>
+            Opens wordcloud_2026.png in a pop-up viewer (see #slides-modal below).
+            The href is a fallback that opens the image directly if JavaScript is off.
           -->
-          <span class="btn btn-disabled" aria-disabled="true">
+          <a href="wordcloud_2026.png" class="btn btn-primary" id="open-slides">
             View Presentation
-          </span>
+          </a>
 
           <p class="mini-card-footer">
-            (Coming soon – slides will be linked here.)
+            Built from the Fall 2026 Day 1 survey (students' class goals).
           </p>
         </article>
 
@@ -268,5 +327,48 @@
       </div>
     </section>
   </div>
+
+  <!-- WORD CLOUD POP-UP (opened by "View Presentation") -->
+  <div class="modal" id="slides-modal" role="dialog" aria-modal="true" aria-labelledby="slides-modal-title" aria-hidden="true">
+    <div class="modal-box">
+      <button type="button" class="modal-close" id="close-slides" aria-label="Close">&times;</button>
+      <h2 class="modal-title" id="slides-modal-title">What students hope to get from this class</h2>
+      <img src="wordcloud_2026.png" alt="Word cloud of students' goals for the AI class, Fall 2026" />
+      <p class="modal-caption">
+        Word cloud of answers to two Day 1 survey questions (Fall 2026): one "unthinkable" goal
+        and one realistic goal for the class. Larger words appeared more often.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var modal = document.getElementById("slides-modal");
+      var openBtn = document.getElementById("open-slides");
+      var closeBtn = document.getElementById("close-slides");
+
+      function openModal(e) {
+        e.preventDefault();
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        closeBtn.focus();
+      }
+
+      function closeModal() {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        openBtn.focus();
+      }
+
+      openBtn.addEventListener("click", openModal);
+      closeBtn.addEventListener("click", closeModal);
+      modal.addEventListener("click", function (e) {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
+      });
+    })();
+  </script>
 </body>
 </html>
